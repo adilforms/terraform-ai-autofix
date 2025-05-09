@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0" # Example AMI (Amazon Linux 2, update as needed)
+  ami           = "ami-0c55b159cbfafe1f0"
   instance_type = "t2.micro"
 
   tags = {
@@ -17,12 +17,12 @@ resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "Security group for EC2 instance with open ports"
 
-  # SSH access from anywhere
+  # SSH access from specific IP range
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["<private-IP-range>/32"] # Replace <private-IP-range> with the provided private IP range
   }
 
   # HTTP access from anywhere
