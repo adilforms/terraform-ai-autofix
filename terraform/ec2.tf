@@ -17,12 +17,12 @@ resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "Security group for EC2 instance with open ports"
 
-  # SSH access from anywhere
+  # Former SSH access from anywhere, now restricted
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["<your allowed IP>/32"] # place the trusted IP here
   }
 
   # HTTP access from anywhere
