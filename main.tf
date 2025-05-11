@@ -1,4 +1,3 @@
-
         resource "aws_s3_bucket" "bucket" {
           bucket = "example-bucket-name"
           acl    = "private"
@@ -7,10 +6,20 @@
             index_document = "index.html"
             error_document = "error.html"
           }
+
+          lifecycle_rule {
+            id      = "example-rule"
+            status  = "Enabled"
+
+            transition {
+              days          = 30
+              storage_class = "GLACIER"
+            }
+          }
         }
 
         resource "aws_s3_bucket_object" "index" {
-          bucket       = "create-by-ai
+          bucket       = "example-bucket-name"
           key          = "index.html"
           content      = "
             <html>
@@ -23,4 +32,3 @@
           acl          = "public-read"
           content_type = "text/html"
         }
-        
