@@ -11,6 +11,10 @@ resource "aws_instance" "example" {
   }
 
   vpc_security_group_ids = [aws_security_group.example.id]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group" "example" {
