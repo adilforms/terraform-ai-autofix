@@ -10,6 +10,10 @@ resource "aws_instance" "example" {
     Name = "example-ec2"
   }
 
+  lifecycle {
+    ignore_changes = [instance_state]
+  }
+
   vpc_security_group_ids = [aws_security_group.example.id]
 }
 
