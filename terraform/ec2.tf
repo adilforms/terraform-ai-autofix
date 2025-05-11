@@ -5,6 +5,7 @@ provider "aws" {
 resource "aws_instance" "example" {
   ami           = "ami-0c55b159cbfafe1f0" # Example AMI (Amazon Linux 2, update as needed)
   instance_type = "t2.micro"
+  key_name      = "<KEY_PAIR_NAME>" # Add the key pair name 
 
   tags = {
     Name = "example-ec2"
@@ -21,7 +22,7 @@ resource "aws_security_group" "example" {
   ingress {
     from_port   = 22
     to_port     = 22
-    protocol    = "tcp"
+    protocol   = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
