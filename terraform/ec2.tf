@@ -11,18 +11,23 @@ resource "aws_instance" "example" {
   }
 
   vpc_security_group_ids = [aws_security_group.example.id]
+
+  # Ensure Instance is in running state
+  instance_state {
+    name = "running"
+  }
 }
 
 resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "Security group for EC2 instance with open ports"
 
-  # SSH access from anywhere
+  # SSH access from specific IPs
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["specific.ip.address/32"] #replace with your IP
   }
 
   # HTTP access from anywhere
