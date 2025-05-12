@@ -17,29 +17,32 @@ resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "Security group for EC2 instance with open ports"
 
-  # SSH access from anywhere
+  # SSH access from trusted sources only
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["<trusted-source-CIDR>"]
   }
 
-  # HTTP access from anywhere
+  # PostgreSQL access from trusted sources only
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 5432
+    to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["<trusted-source-CIDR>"]
   }
 
-  # HTTPS access from anywhere
+  # RDP access from trusted sources only
   ingress {
-    from_port   = 443
-    to_port     = 443
+    from_port   = 3389
+    to_port     = 3389
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["<trusted-source-CIDR>"]
   }
+
+  # Remove unrestricted HTTP and HTTPS access if not necessary
+  # If necessary, limit it to trusted sources as done for SSH, PostgreSQL and RDP
 
   # Allow all outbound traffic
   egress {
