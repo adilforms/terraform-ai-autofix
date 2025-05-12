@@ -15,30 +15,14 @@ resource "aws_instance" "example" {
 
 resource "aws_security_group" "example" {
   name        = "example-sg"
-  description = "Security group for EC2 instance with open ports"
+  description = "Security group for EC2 instance with specific access"
 
-  # SSH access from anywhere
+  # SSH access from specific ip
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # HTTP access from anywhere
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # HTTPS access from anywhere
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["x.x.x.x/32"]    # Replace x.x.x.x with the specific IP(s)
   }
 
   # Allow all outbound traffic
