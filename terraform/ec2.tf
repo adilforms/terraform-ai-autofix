@@ -17,14 +17,6 @@ resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "Security group for EC2 instance with open ports"
 
-  # SSH access from anywhere
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   # HTTP access from anywhere
   ingress {
     from_port   = 80
