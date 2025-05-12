@@ -17,13 +17,13 @@ resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "Security group for EC2 instance with open ports"
 
-  # SSH access from anywhere
-  ingress {
+  # SSH access from anywhere - Remove this Rule for Better Security
+  /*ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+  }*/
 
   # HTTP access from anywhere
   ingress {
@@ -40,6 +40,8 @@ resource "aws_security_group" "example" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  # Remove RDP and PostgreSQL access from open to internet 
 
   # Allow all outbound traffic
   egress {
